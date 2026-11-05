@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% from 'partials/_icons.html' import icon %}
+{% block head %}
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"Store","name":site_name,"url":site_url,"description":"Handcrafted eyewear in Italian acetate and gold wire."}|tojson }}</script>
+<script type="application/ld+json">{{ faq_ld|tojson }}</script>
+{% endblock %}
+{% block content %}
+{% include 'partials/_hero.html' %}
+
+<section class="trust" aria-label="Store promises"><div class="wrap"><ul>
+  {% for ic, text in trust %}<li>{{ icon(ic) }}{{ text }}</li>{% endfor %}
+</ul></div></section>
+
+<section class="sec" id="collection" aria-labelledby="h-col"><div class="wrap">
+  <div class="head rv">
+    <div><span class="kicker">The collection</span><h2 id="h-col">Frames made to be worn daily</h2>
+      <p class="lead">Four pieces, one standard: hand-finished, lightweight and built to outlast the trend.</p></div>
+    <div class="tabs" role="group" aria-label="Filter products">
+      <button class="tab" data-filter="all" aria-pressed="true">All</button>
+      <button class="tab" data-filter="frames" aria-pressed="false">Frames</button>
+      <button class="tab" data-filter="cases" aria-pressed="false">Cases &amp; sets</button>
+    </div>
+  </div>
+  <div class="grid4" id="grid">
+    {% for p in products %}
+    <article class="card rv" data-id="{{ p.id }}" data-cat="{{ p.category }}" data-name="{{ p.name }}" data-price="{{ p.price }}" data-img="{{ url_for('static', filename=p.image) }}">
+      <div class="im">
+        {% if p.badge %}<span class="tag">{{ p.badge }}</span>{% endif %}
+        <button class="ib wish" data-wish aria-pressed="false" aria-label="Save {{ p.name }} to wishlist">{{ icon('heart') }}</button>
+        <a href="{{ url_for('main.product', pid=p.id) }}" tabindex="-1" aria-hidden="true"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.alt }}" loading="lazy" width="1400" height="600"></a>
+      </div>
+      <h3><a href="{{ url_for('main.product', pid=p.id) }}">{{ p.name }}</a></h3>
+      <p class="s">{{ p.tagline }}</p>
+      <div class="row"><span class="price">${{ p.price }}</span>
+        <span class="sw" role="img" aria-label="Available colours">{% for c in p.colors %}<i style="background:{{ c }}"></i>{% endfor %}</span></div>
+      <button class="btn btn-primary add" data-add>Add to bag</button>
+    </article>
+    {% endfor %}
+  </div>
+</div></section>
+
+<section class="sec nopad-top" id="craft" aria-labelledby="h-craft"><div class="wrap split">
+  <div class="panel rv"><img src="{{ url_for('static', filename='img/2-turn.webp') }}" alt="Tortoiseshell eyeglasses seen from the side, showing the gold hinge" loading="lazy" width="1400" height="668"><span class="cap">Hand-polished for 48 hours</span></div>
+  <div class="rv">
+    <span class="kicker">Our craft</span><h2 id="h-craft">Precision in every detail</h2>
+    <p class="lead">Every frame starts as a single sheet of acetate. It is cut, shaped, tumbled with wood chips and polished by hand until the surface glows from within. Nothing is rushed, because nothing needs to be replaced.</p>
+    <div class="stats" id="stats">{% for n, suf, label in stats %}<div><b data-n="{{ n }}" data-s="{{ suf }}">0{{ suf }}</b><span>{{ label }}</span></div>{% endfor %}</div>
+  </div>
+</div></section>
+
+<section class="sec mats" id="materials" aria-labelledby="h-mat"><div class="wrap">
+  <div class="rv"><span class="kicker">Materials</span><h2 id="h-mat">Designed with care</h2>
+    <p class="lead">Three honest materials, chosen for how they feel after years, not just on day one.</p></div>
+  <div class="three">{% for ic, title, text in materials %}
+    <div class="mat rv">{{ icon(ic) }}<h3>{{ title }}</h3><p>{{ text }}</p></div>{% endfor %}</div>
+</div></section>
+
+<section class="sec dark" id="case" aria-labelledby="h-case"><div class="wrap split">
+  <div class="rv"><span class="kicker">The case</span><h2 id="h-case">A home for what you see</h2>
+    <p class="lead">Full-grain black leather with a soft suede lining. It closes with a single polished snap and fits in any pocket or bag.</p>
+    <ul class="ticks"><li>{{ icon('check') }}Protects against scratches and pressure</li><li>{{ icon('check') }}Suede lining that doubles as a lens cloth</li><li>{{ icon('check') }}Included free with every pair</li></ul>
+    <a class="btn btn-primary" href="{{ url_for('main.product', pid='travel-set') }}">Shop the Travel Set</a></div>
+  <div class="panel rv light"><img src="{{ url_for('static', filename='img/5-closed.webp') }}" alt="Closed black leather glasses case" loading="lazy" width="1400" height="596"><span class="cap">Crafted to carry</span></div>
+</div></section>
+
+<section class="sec" id="stories" aria-labelledby="h-st"><div class="wrap">
+  <div class="rv"><span class="kicker">Stories</span><h2 id="h-st">Worn by people who notice</h2></div>
+  <div class="quotes">{% for text, who in reviews %}
+    <figure class="q rv"><div class="stars" role="img" aria-label="5 out of 5 stars">{% for _ in range(5) %}<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.5 5.6 6 .6-4.5 4 1.3 6L10 14.7 4.7 17.7 6 11.7 1.5 7.7l6-.6z"/></svg>{% endfor %}</div>
+      <blockquote><p>{{ text }}</p></blockquote><figcaption>Sample review — {{ who }}</figcaption></figure>{% endfor %}</div>
+</div></section>
+
+<section class="sec mats" id="faq" aria-labelledby="h-faq"><div class="wrap narrow">
+  <div class="rv"><span class="kicker">FAQ</span><h2 id="h-faq">Good questions</h2></div>
+  <div class="faq rv">{% for q, a in faq %}<details><summary>{{ q }}</summary><p>{{ a }}</p></details>{% endfor %}</div>
+</div></section>
+
+<section class="sec cta" aria-labelledby="h-cta"><div class="wrap rv">
+  <h2 id="h-cta">Find the frame that feels like you</h2>
+  <p class="lead">Try any pair for 30 days. If it is not right, send it back, free.</p>
+  <div class="cta-row"><a class="btn btn-primary" href="#collection">Shop the collection</a><a class="btn btn-ghost" href="#craft">See how it is made</a></div>
+</div></section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/hero.js') }}?v={{ asset_version }}" defer></script>{% endblock %}

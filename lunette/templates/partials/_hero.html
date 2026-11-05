@@ -1,0 +1,37 @@
+{% from 'partials/_icons.html' import icon %}
+<section class="hero" id="top" aria-label="Featured" data-chapters='{{ chapters|tojson }}' data-video="{{ 1 if hero_video else 0 }}">
+  <div class="hero-light" id="l1"></div><div class="hero-light b" id="l2"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="hero-floor"></div>
+  <div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="copy">
+      <h1 class="sr">{{ site_name }} — handcrafted eyewear in Italian acetate and gold wire</h1>
+      <div class="eyebrow" id="eb">{{ chapters[0].tag }}</div>
+      <div class="hl" id="hl" aria-live="off">{% for l in chapters[0].lines %}<span class="ln"><span>{{ l }}</span></span>{% endfor %}</div>
+      <p class="hero-p" id="hp">{{ chapters[0].body }}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#collection">Shop the collection {{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="#craft">Our craft</a>
+      </div>
+    </div>
+    <div class="stage" id="stage" role="img" aria-label="One continuous shot: eyeglasses are shown, turned in the light and placed into a black leather case">
+      {% if hero_video %}
+      <video class="hero-video" id="hvid" src="{{ url_for('static', filename='video/hero.mp4') }}" poster="{{ url_for('static', filename='img/4-shell.webp') }}" autoplay muted loop playsinline preload="auto"></video>
+      {% else %}
+      <img class="layer wire"   src="{{ url_for('static', filename='img/1-wire.webp') }}"   alt="" width="1400" height="567" data-w="96">
+      <img class="layer shell"  src="{{ url_for('static', filename='img/4-shell.webp') }}"  alt="" width="1400" height="540" data-w="100">
+      <img class="layer turn"   src="{{ url_for('static', filename='img/2-turn.webp') }}"   alt="" width="1400" height="668" data-w="96">
+      <img class="layer open"   src="{{ url_for('static', filename='img/3-open.webp') }}"   alt="" width="1400" height="789" data-w="72">
+      <img class="layer closed" src="{{ url_for('static', filename='img/5-closed.webp') }}" alt="" width="1400" height="596" data-w="84">
+      <div class="sweep" id="sweep"></div>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs id="mbdefs"></defs></svg>
+      {% endif %}
+    </div>
+  </div>
+  <div class="hud">
+    <div class="chapters" id="chaps" role="group" aria-label="Story chapters"></div>
+    <button class="pp" id="pp" aria-label="Pause animation"><svg viewBox="0 0 16 16" id="ppi" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg></button>
+  </div>
+  <div class="scroll" aria-hidden="true">Scroll</div>
+</section>

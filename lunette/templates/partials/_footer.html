@@ -1,0 +1,22 @@
+<footer class="ft">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><a class="logo" href="{{ url_for('main.index') }}">{{ site_name }}</a><p class="fabout">Handcrafted eyewear in Italian acetate and gold wire. Made slowly, worn for years.</p></div>
+      <nav aria-label="Shop"><h4>Shop</h4><ul>
+        <li><a href="{{ url_for('main.index') }}#collection">All frames</a></li>
+        <li><a href="{{ url_for('main.product', pid='travel-set') }}">The Travel Set</a></li>
+        <li><a href="{{ url_for('main.product', pid='leather-case') }}">Cases</a></li></ul></nav>
+      <nav aria-label="Company"><h4>Company</h4><ul>
+        <li><a href="{{ url_for('main.index') }}#craft">Our craft</a></li>
+        <li><a href="{{ url_for('main.index') }}#materials">Materials</a></li>
+        <li><a href="{{ url_for('main.index') }}#faq">FAQ</a></li></ul></nav>
+      <div><h4>Newsletter</h4>
+        <form class="nl" id="nl" novalidate>
+          <label for="em">Email address</label>
+          <div class="f"><input id="em" name="email" type="email" placeholder="name@example.com" autocomplete="email" aria-describedby="emerr"><button type="submit" class="nl-btn">Subscribe</button></div>
+          <div class="err" id="emerr" role="alert"></div>
+        </form></div>
+    </div>
+    <div class="legal"><span>© 2026 {{ site_name }}. All rights reserved.</span><span>Privacy · Terms · Shipping</span></div>
+  </div>
+</footer>

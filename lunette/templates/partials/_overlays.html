@@ -1,0 +1,29 @@
+{% from 'partials/_icons.html' import icon %}
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="drawer" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+  <header class="drawer-h"><h2 id="cart-title">Your bag</h2><button class="ib" data-close aria-label="Close bag">{{ icon('close') }}</button></header>
+  <div class="ship" id="ship"><p id="ship-text"></p><div class="ship-bar"><i id="ship-fill"></i></div></div>
+  <ul class="lines" id="lines"></ul>
+  <p class="empty" id="cart-empty">Your bag is empty. <a href="{{ url_for('main.index') }}#collection" data-close>Shop the collection</a></p>
+  <footer class="drawer-f">
+    <div class="sub"><span>Subtotal</span><b id="subtotal">$0</b></div>
+    <p class="note">Taxes and shipping calculated at checkout.</p>
+    <button class="btn btn-primary full" id="checkout" disabled>Checkout</button>
+  </footer>
+</aside>
+
+<aside class="drawer" id="wish" role="dialog" aria-modal="true" aria-labelledby="wish-title" hidden>
+  <header class="drawer-h"><h2 id="wish-title">Wishlist</h2><button class="ib" data-close aria-label="Close wishlist">{{ icon('close') }}</button></header>
+  <ul class="lines" id="wish-lines"></ul>
+  <p class="empty" id="wish-empty">Tap the heart on any product to save it here.</p>
+</aside>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-labelledby="search-title" hidden>
+  <div class="search-in">
+    <div class="search-h"><h2 id="search-title">Search</h2><button class="ib" data-close aria-label="Close search">{{ icon('close') }}</button></div>
+    <label for="q" class="lbl">Search frames and cases</label>
+    <input id="q" type="search" placeholder="e.g. tortoise, wire, case" autocomplete="off">
+    <ul class="results" id="results" aria-live="polite"></ul>
+  </div>
+</div>

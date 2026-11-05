@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Secrets & local data
+.env
+.env.*
+!.env.example
+*.jsonl
+instance/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Vercel / Docker
+.vercel/
+docker-compose.override.yml
+
+# Local archives
+*.zip
+
+# Hero video is optional and usually large - add it deliberately with `git add -f`
+public/static/video/*.mp4
+public/static/video/*.webm

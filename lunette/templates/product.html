@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from 'partials/_icons.html' import icon %}
+{% block title %}{{ p.name }} — {{ site_name }}{% endblock %}
+{% block desc %}{{ p.description }}{% endblock %}
+{% block bodyclass %}page{% endblock %}
+{% block head %}<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"Product","name":p.name,"description":p.description,"image":site_url ~ url_for('static', filename=p.image),"offers":{"@type":"Offer","priceCurrency":"USD","price":p.price,"availability":"https://schema.org/InStock"}}|tojson }}</script>{% endblock %}
+{% block content %}
+<div class="wrap pdp">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{{ url_for('main.index') }}">Home</a> / <a href="{{ url_for('main.index') }}#collection">Shop</a> / <span aria-current="page">{{ p.name }}</span></nav>
+  <div class="split">
+    <div class="panel"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.alt }}" width="1400" height="600"></div>
+    <article class="card-detail" data-id="{{ p.id }}" data-name="{{ p.name }}" data-price="{{ p.price }}" data-img="{{ url_for('static', filename=p.image) }}">
+      <span class="kicker">{{ p.tagline }}</span><h1 class="h1">{{ p.name }}</h1>
+      <p class="price big">${{ p.price }}</p><p class="lead">{{ p.description }}</p>
+      <div class="cta-row" style="margin-top:28px">
+        <button class="btn btn-primary" data-add>Add to bag</button>
+        <button class="btn btn-ghost" data-wish aria-pressed="false">Save to wishlist</button>
+      </div>
+      <ul class="ticks plain"><li>{{ icon('check') }}Free shipping over ${{ free_shipping }}</li><li>{{ icon('check') }}30-day returns</li><li>{{ icon('check') }}2-year warranty</li></ul>
+    </article>
+  </div>
+  <h2 class="rel-h">You may also like</h2>
+  <div class="grid3">{% for r in related %}
+    <a class="relcard" href="{{ url_for('main.product', pid=r.id) }}"><div class="im"><img src="{{ url_for('static', filename=r.image) }}" alt="{{ r.alt }}" loading="lazy" width="1400" height="600"></div><h3>{{ r.name }}</h3><p class="s">${{ r.price }}</p></a>{% endfor %}</div>
+</div>
+{% endblock %}

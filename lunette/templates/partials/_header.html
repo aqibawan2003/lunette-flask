@@ -1,0 +1,17 @@
+{% from 'partials/_icons.html' import icon %}
+<header class="hdr" id="hdr">
+  <a class="logo" href="{{ url_for('main.index') }}" aria-label="{{ site_name }} home">{{ site_name }}</a>
+  <nav class="nav" aria-label="Primary">
+    {% for label, href in nav %}<a href="{{ url_for('main.index') }}{{ href }}">{{ label }}</a>{% endfor %}
+  </nav>
+  <div class="icons">
+    <button class="ib" id="open-search" aria-label="Search" aria-haspopup="dialog">{{ icon('search') }}</button>
+    <button class="ib" id="open-wish" aria-label="Wishlist">{{ icon('heart') }}<span class="badge" id="wish-count" hidden>0</span></button>
+    <button class="ib" id="open-cart" aria-label="Open bag" aria-haspopup="dialog">{{ icon('bag') }}<span class="badge" id="cart-count" hidden>0</span></button>
+    <button class="ib menu" id="open-menu" aria-label="Open menu" aria-haspopup="dialog">{{ icon('menu') }}</button>
+  </div>
+</header>
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button class="ib mclose" data-close aria-label="Close menu">{{ icon('close') }}</button>
+  {% for label, href in nav %}<a href="{{ url_for('main.index') }}{{ href }}" data-close>{{ label }}</a>{% endfor %}
+</div>

@@ -1,0 +1,18 @@
+[project]
+name = "lunette"
+version = "1.0.0"
+description = "LUNETTE - Flask storefront with a code-made, single-shot video hero"
+requires-python = ">=3.10"
+dependencies = ["Flask>=3.0,<4", "gunicorn>=22.0"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

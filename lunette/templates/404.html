@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Something went wrong' if server_error else 'Page not found' }} — {{ site_name }}{% endblock %}
+{% block bodyclass %}page{% endblock %}
+{% block content %}
+<div class="wrap" style="padding:180px var(--pad) 140px;text-align:center">
+  <span class="kicker">{{ '500' if server_error else '404' }}</span>
+  <h1 class="h1">{{ 'Something went wrong.' if server_error else 'This page is out of focus.' }}</h1>
+  <p class="lead" style="margin:0 auto 32px">{{ 'Please try again in a moment.' if server_error else 'The page you are looking for does not exist or has moved.' }}</p>
+  <a class="btn btn-primary" href="{{ url_for('main.index') }}">Back to home</a>
+</div>
+{% endblock %}

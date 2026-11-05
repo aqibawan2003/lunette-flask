@@ -1,0 +1,33 @@
+{% from 'partials/_icons.html' import icon %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{{ site_name }} — Handcrafted Eyewear in Italian Acetate{% endblock %}</title>
+<meta name="description" content="{% block desc %}{{ site_name }} makes handcrafted tortoiseshell and gold-wire eyeglasses with leather cases. Free shipping over $75, 30-day returns and a 2-year warranty.{% endblock %}">
+<link rel="canonical" href="{{ site_url }}{{ request.path }}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="Premium acetate and gold-wire eyeglasses, made to last.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site_url }}{{ request.path }}">
+<meta property="og:image" content="{{ site_url }}{{ url_for('static', filename='img/4-shell.webp') }}">
+<meta name="theme-color" content="#E9DED3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v={{ asset_version }}">
+{% block head %}{% endblock %}
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+<a class="skip" href="#main">Skip to content</a>
+{% include 'partials/_header.html' %}
+<main id="main">{% block content %}{% endblock %}</main>
+{% include 'partials/_footer.html' %}
+{% include 'partials/_overlays.html' %}
+<button class="totop" id="totop" aria-label="Back to top" hidden>{{ icon('up') }}</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/main.js') }}?v={{ asset_version }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
